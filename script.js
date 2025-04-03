@@ -53,7 +53,7 @@ function setProfile() {
     dailyGoals.fats = (tdee * 0.3) / 9;
 
     userProfile = { age, gender, weight, height, activity };
-    userId = "User" + Date.now(); // Уникальный ID
+    userId = "User" + Date.now();
     document.getElementById("profileForm").style.display = "none";
     document.getElementById("hungerButton").style.display = "block";
     document.getElementById("foodInput").style.display = "block";
@@ -119,7 +119,6 @@ function logFood() {
         Жиры <progress value="${fatsProgress}" max="1"></progress> ${Math.round(fatsProgress * 100)}%`;
     document.getElementById("foodInput").value = "";
 
-    // Логирование
     const logEntry = {
         userId,
         date: new Date().toLocaleDateString(),
@@ -214,10 +213,7 @@ function saveLogToExcel() {
         csvContent += `${entry.userId},${entry.date},${entry.food},${entry.points},${entry.calories},${entry.protein},${entry.carbs},${entry.fats},${entry.usefulness},${entry.category}\n`;
     });
 
-    // Вывод в консоль для копирования
     console.log("Лог для Excel:\n", csvContent);
-
-    // Создание файла для скачивания
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
@@ -248,4 +244,15 @@ window.onload = function() {
         const fatsProgress = dailyMacros.fats / dailyGoals.fats;
         document.getElementById("progress").innerHTML = `
             Прогресс:
-            Белок <progress value="${proteinProgress}" max="
+            Белок <progress value="${proteinProgress}" max="1"></progress> ${Math.round(proteinProgress * 100)}%
+            Углеводы <progress value="${carbsProgress}" max="1"></progress> ${Math.round(carbsProgress * 100)}%
+            Жиры <progress value="${fatsProgress}" max="1"></progress> ${Math.round(fatsProgress * 100)}%`;
+        document.getElementById("profileForm").style.display = "none";
+        document.getElementById("hungerButton").style.display = "block";
+        document.getElementById("foodInput").style.display = "block";
+        document.getElementById("logButton").style.display = "block";
+        document.getElementById("resetButton").style.display = "block";
+        document.getElementById("excelButton").style.display = "block";
+        updateRecommendation();
+    }
+};
