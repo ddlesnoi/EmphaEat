@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>EmpathEat</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>EmpathEat</h1>
+    <div id="profileForm">
+        <h2>Ваш профиль</h2>
+        <input type="number" id="age" placeholder="Возраст">
+        <input type="text" id="gender" placeholder="Пол (м/ж)">
+        <input type="number" id="weight" placeholder="Вес (кг)">
+        <input type="number" id="height" placeholder="Рост (см)">
+        <select id="activity">
+            <option value="1.2">Сидячий</option>
+            <option value="1.375">Легкий</option>
+            <option value="1.55">Средний</option>
+            <option value="1.725">Высокий</option>
+        </select>
+        <button onclick="setProfile()">Сохранить профиль</button>
+    </div>
+    <button onclick="showHungerPrompt()" id="hungerButton" style="display:none;">Голоден?</button>
+    <input type="text" id="foodInput" placeholder="Что ты съел? (например, кусок курицы)" style="display:none;">
+    <button onclick="logFood()" id="logButton" style="display:none;">Лог</button>
+    <button onclick="resetData()" id="resetButton" style="display:none;">Сброс</button>
+    <button onclick="saveLogToExcel()" id="excelButton" style="display:none;">Сохранить лог в Excel</button>
+    <div id="score">Очки: 0</div>
+    <div id="progress">Прогресс: Белок 0%, Углеводы 0%, Жиры 0%</div>
+    <div id="recommendation"></div>
+    <ul id="logList"></ul>
+    <script src="script.js"></script>
+</body>
+</html>
