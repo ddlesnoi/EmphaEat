@@ -33,19 +33,34 @@ const portionModifiers = {
 };
 
 function setProfile() {
+    console.log("setProfile вызвана");
     const age = parseInt(document.getElementById("age").value);
     const gender = document.getElementById("gender").value.toLowerCase();
     const weight = parseFloat(document.getElementById("weight").value);
     const height = parseFloat(document.getElementById("height").value);
     const activity = parseFloat(document.getElementById("activity").value);
 
+    console.log("Введённые данные:", { age, gender, weight, height, activity });
+
+    if (!age || !gender || !weight || !height || !activity) {
+        console.log("Ошибка: не все поля заполнены");
+        alert("Пожалуйста, заполните все поля профиля!");
+        return;
+    }
+
     let bmr;
     if (gender === "м") {
         bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
-    } else {
+    } else if (gender === "ж") {
         bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+    } else {
+        console.log("Ошибка: неверный пол");
+        alert("Укажите пол: 'м' или 'ж'");
+        return;
     }
+
     const tdee = bmr * activity;
+    console.log("Рассчитанные значения: BMR =", bmr, "TDEE =", tdee);
 
     dailyGoals.calories = tdee;
     dailyGoals.protein = (tdee * 0.2) / 4;
@@ -54,12 +69,16 @@ function setProfile() {
 
     userProfile = { age, gender, weight, height, activity };
     userId = "User" + Date.now();
+    console.log("Профиль сохранён:", userProfile);
+
     document.getElementById("profileForm").style.display = "none";
     document.getElementById("hungerButton").style.display = "block";
     document.getElementById("foodInput").style.display = "block";
     document.getElementById("logButton").style.display = "block";
     document.getElementById("resetButton").style.display = "block";
     document.getElementById("excelButton").style.display = "block";
+
+    console.log("Кнопки должны быть видны");
     updateRecommendation();
 }
 
